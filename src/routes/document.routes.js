@@ -32,19 +32,19 @@ var upload = multer({
 });
 
  */
-router.route('/document').get(oauth2, get_documents );
+router.route('/api/documents').get(oauth2, get_documents );
 
-router.route('/document/:id').get(oauth2, get_document);
+router.route('/api/document/:id').get(oauth2, get_document);
 
-router.route('/document_content/:id').get(document_content);
+router.route('/api/document_content/:id').get(document_content);
 
-router.route('/document_ByName/:name').get(document_ByName);
+router.route('/api/document_ByName/:name').get(document_ByName);
 
-router.route('/new_document').post(  post_document);
+router.route('/api/new_document').post(  post_document);
 
-router.route('/updateDocumentName').get(  updateDocumentName);
+router.route('/api/updateDocumentName').get(  updateDocumentName);
 
-router.route('/delete_document/:id').delete( oauth2, delete_document);
+router.route('/api/delete_document/:id').delete( delete_document);
 
 //router.route('/createText').post(upload.single('image'), crearTXT);
 

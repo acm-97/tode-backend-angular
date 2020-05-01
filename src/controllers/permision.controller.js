@@ -1,10 +1,22 @@
 const Permision = require('../models/permision.model')
 const Notification = require('../models/notification.model');
+const OauthUser = require('../models/oauth2User.model')
 
 const permisionController = {}
 
 permisionController.get_permisions = async (req, res, next) => {
-    await Permision.find().populate('document_user').populate('document').then(function (permision) {
+    await Permision.find().populate('withPermisions').populate('document').then(function (permision) {
+            res.status(200).send(permision)
+        })
+        .catch(err => res.status(400).json(err))
+
+
+};
+
+permisionController.getPermisionsByDocument = async (req, res, next) => {
+    const params = JSON.parse(JSON.stringify(req.params));
+    
+    await Permision.find({document: params.id }).populate('withPermisions').populate('document').then(function (permision) {
             res.status(200).send(permision)
         })
         .catch(err => res.status(400).json(err))
@@ -13,26 +25,47 @@ permisionController.get_permisions = async (req, res, next) => {
 };
 
 permisionController.post_permision = async (req, res, next) => {
-    await Permision.create(req.body).then(permision => {
-            Permision.findOne({
-                withPermisions: permision.withPermisions
-            }).populate('document').then(perm => {
-                notification_body = {
-                    notification: `Un usuaio desea compartir contigo el articulo de nombre: ${perm.document.name}`,
-                    forPermisions: permision.withPermisions,
-                    document: permision.document
-                };
-                Notification.create(notification_body);
+    const body = JSON.parse(JSON.stringify(req.body));
+    const params = JSON.parse(JSON.stringify(req.params));
+    const query = JSON.parse(JSON.stringify(req.query));
+    
+        for (let i = 0; i < body.name.length; i++) {             
+            await OauthUser.findOne({name: body.name[i]}).then( user => {         
+            permision_body = {
+                withPermisions: user._id,
+                document: body.document,
+            }
+            Permision.findOne({withPermisions: user._id, document: body.document}).then( permision => {
+                if (permision) {
+                    res.status(400).json({message: `El usuario ${user.name} ya tiene permisos sobe el documento`}) ;
+                }else{
+                    Permision.create(permision_body).then(newPpermision => {
+                        Permision.findOne({
+                            withPermisions: newPpermision.withPermisions
+                        }).populate('document').then(perm => {
+                            notification_body = {
+                                notification: `Un usuaio desea compartirte`,
+                                forPermisions: newPpermision.withPermisions,
+                                document: newPpermision.document
+                            };
+                            Notification.create(notification_body);
+                        })
+                        res.status(200).send(permision)
+                    })
+                    .catch(err => res.status(400).json(err))
+                }        
             })
-            res.status(200).send(permision)
         })
-        .catch(err => res.status(400).json(err))
-
+        }
 };
 
 permisionController.delete_permision = async (req, res, next) => {
+    const body = JSON.parse(JSON.stringify(req.body));
+    const params = JSON.parse(JSON.stringify(req.params));
+    const query = JSON.parse(JSON.stringify(req.query));
+
     await Permision.findOneAndRemove({
-            _id: req.params.id
+            _id: params.id
         }).then(permision => {
             Notification.findOneAndRemove({
                 forPermisions: permision.withPermisions
@@ -41,6 +74,19 @@ permisionController.delete_permision = async (req, res, next) => {
             )
         })
         .catch(err => res.status(400).json(err))
+}
+
+permisionController.cancelPermisionShared = async (req, res, next) => {
+    const body = JSON.parse(JSON.stringify(req.body));
+    const params = JSON.parse(JSON.stringify(req.params));
+    const query = JSON.parse(JSON.stringify(req.query));
+
+    await Permision.findOneAndRemove({
+        document: params.id,
+        withPermisions: req.user._id
+    }).then( permision => {
+        res.status(200).send(permision)
+    })
 }
 
 module.exports = permisionController;

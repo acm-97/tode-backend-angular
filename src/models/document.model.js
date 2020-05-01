@@ -6,12 +6,11 @@ const documentSchema = new Schema({
         type: String,
         required: [true, 'El campo (nombre del documento) del documento es requerido']
     },
-    document_user: {
+    autor: {
         type: Schema.ObjectId,
         ref: 'oauth2User',
         required: [true, 'No existe usuario al cual asiganar el documento']
-    },
-    imgURL: String
+    }
 }, {
     timestamps: true
 })

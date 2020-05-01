@@ -1,22 +1,24 @@
 const { Router } = require('express');
 const router = Router();
-const { get_notifications, post_notification, get_notificationDocVersion, delete_notification,
-        get_notificationForPermisions, get_notificationNumber, get_requestNumber} = require('../controllers/notification.controller')
+const { get_notifications, post_notification, updateNotificationDocVersion, delete_notification,
+    updateNotificationForPermisions, get_notificationNumber, get_requestNumber, updateAllStatus} = require('../controllers/notification.controller')
 
 const oauth2 = require('../middlewares/oauth2')
 
-router.route('/notifications').get(oauth2, get_notifications);
+router.route('/api/notifications').get(oauth2, get_notifications);
 
-router.route('/new_notification').post(post_notification);
+router.route('/api/new_notification').post(post_notification);
 
-router.route('/notificationDocVersion').get(oauth2, get_notificationDocVersion);
+router.route('/api/updateAllStatus').get(oauth2, updateAllStatus);
 
-router.route('/notificationForPermisions').get(oauth2, get_notificationForPermisions);
+router.route('/api/updateNotificationDocVersion').get(oauth2, updateNotificationDocVersion);
 
-router.route('/notificationNumber').get(oauth2, get_notificationNumber);
+router.route('/api/updateNotificationForPermisions/:id').get(oauth2, updateNotificationForPermisions);
 
-router.route('/requestNumber').get(oauth2, get_requestNumber);
+router.route('/api/notificationNumber').get(oauth2, get_notificationNumber);
 
-router.route('/delete_notification/:id').delete(oauth2, delete_notification);
+router.route('/api/requestNumber').get(oauth2, get_requestNumber);
+
+router.route('/api/delete_notification/:id').delete(oauth2, delete_notification);
 
 module.exports = router;

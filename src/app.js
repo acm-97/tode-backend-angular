@@ -6,6 +6,7 @@ const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser"); // parse cookie header
 const config = require("config")
 const session = require("express-session")
+const morgan = require('morgan')
 var bodyParser = require('body-parser');
 
 // 
@@ -44,12 +45,13 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000", // allow to server to accept request from different origin
+    origin: "https://localhost:4200", // allow to server to accept request from different origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true // allow session cookie from browser to pass through
   })
 );
 
+app.use(morgan('dev'))
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 

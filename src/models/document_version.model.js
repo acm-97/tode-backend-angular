@@ -3,7 +3,11 @@ const Schema = mongoose.Schema
 
 const document_versionSchema = new Schema({
     coment: String,
-    document_user: {
+    autor: {
+        type: Schema.ObjectId,
+        ref: 'oauth2User'
+    },
+    editor: {
         type: Schema.ObjectId,
         ref: 'oauth2User'
     },

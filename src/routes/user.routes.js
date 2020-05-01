@@ -31,17 +31,17 @@ var upload = multer({
 
 const oauth2 = require('../middlewares/oauth2')
 
-router.route('/user').get(oauth2, get_users);
+router.route('/api/user').get(oauth2, get_users);
 
-router.route('/user/:id').get(get_user);
+router.route('/api/user/:id').get(get_user);
 
-router.route('/user_topermision').get(oauth2, getUsersToPermission);
+router.route('/api/user_topermision').get(oauth2, getUsersToPermission);
 
-router.route('/updateUser').post(updateUser);
+router.route('/api/updateUser').post(updateUser);
 
-router.route('/updateImage').post(upload, updateImage);
+router.route('/api/updateImage').post(upload, updateImage);
 
-router.route('/delete_user/:id').delete(oauth2, delete_user);
+router.route('/api/delete_user/:id').delete(oauth2, delete_user);
 
 
 module.exports = router;

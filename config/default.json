@@ -2,15 +2,15 @@
     "MONGODB_URI": "mongodb://localhost/tode",
     "jwtSecret": "Secrete_User_Password",
     "port": 4000,
-    "data_dir": "/media/alejandro/6EBCB2ECBCB2AE49/Tocororo/Proyectos/data",
-    "images_dir": "/media/alejandro/6EBCB2ECBCB2AE49/Tocororo/Proyectos/images",
+    "data_dir": "/media/alejandro/6EBCB2ECBCB2AE49/Tocororo/Proyectos/tode-Angular/data",
+    "images_dir": "/media/alejandro/6EBCB2ECBCB2AE49/Tocororo/Proyectos/tode-Angular/images",
     "secret-session": "Secret Session",
     "behind-proxy": false,
     "authorizationURL":" https://sceiba-lab.upr.edu.cu/oauth/authorize",
     "tokenURL": "https://sceiba-lab.upr.edu.cu/oauth/token",
-    "clientID": "AP4tYbpVvR14rNLWBmkivI3Yg4ELV9u1svjVpvAP",
-    "clientSecret": "4lEdCnindyejETaXa7b2MnAuKLwpHKBA00PGgmha33egzVYIfSnKbBqtXRJ7",
-    "callbackURL": "/oauth2",
-    "CLIENT_HOME_PAGE_URL": "https://localhost:3000"
+    "clientID": "wD07vfK94DxbBSRPWApbX563k2UuBFRv4ZTFmDQ7",
+    "clientSecret": "i6fjtuFMy6TZsTGorqPCg5GlGivTof5iJ1Exzo9d8Ei2wq5PAFG9dl7fXlnl",
+    "callbackURL": "/api/oauth2",
+    "CLIENT_HOME_PAGE_URL": "https://localhost:4200"
     
 }

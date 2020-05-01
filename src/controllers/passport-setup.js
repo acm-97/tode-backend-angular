@@ -35,10 +35,10 @@ passport.use(new OAuth2Strategy({
     // create new user if the database doesn't have this user
     const date = new Date();
     const expires = (parseInt(profile.expires_in) * 1000) + date.getTime();
+    const str = profile.user.email;
+    const name = str.split('@');
 
-    if (!currentUser) {
-      const str = profile.user.email;
-      const name = str.split('@');
+    if (!currentUser && currentUser.name != name[0]) {
       await new Oauth2User({
         access_token: profile.access_token,
         expires_in: expires,

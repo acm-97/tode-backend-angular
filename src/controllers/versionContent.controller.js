@@ -29,8 +29,12 @@ versionContent.createVersionFile = (document_version, text) => {
 }
 
 versionContent.document_content = async (req, res) => {
+    const body = JSON.parse(JSON.stringify(req.body));
+    const params = JSON.parse(JSON.stringify(req.params));
+    const query = JSON.parse(JSON.stringify(req.query));
+
     await Document.findOne({
-        _id: req.params.id
+        _id: params.id
     }).then(document => {
         var dir = config.data_dir + '/' + document._id;
         fs.readFile(dir + '/' + `${document._id}.txt`, "utf8", function (err, data) {
@@ -42,8 +46,12 @@ versionContent.document_content = async (req, res) => {
 };
 
 versionContent.document_version_content = async (req, res) => {
+    const body = JSON.parse(JSON.stringify(req.body));
+    const params = JSON.parse(JSON.stringify(req.params));
+    const query = JSON.parse(JSON.stringify(req.query));
+    
     await DocumentVersion.findOne({
-        _id: req.params.id
+        _id: params.id
     }).then(document_version => {
         var dir = config.data_dir + '/' + document_version.document
         fs.readFile(dir + '/' + `${document_version._id}`, "utf8", function read(err, data) {

@@ -16,7 +16,7 @@ auth = async (req, res, next) => {
                 } else {
 
                     return res.status(401).json({
-                        expires_in: 'Tiempo de sesion agotado. Vuelva a loguearse'
+                        message: 'Tiempo de sesion agotado. Vuelva a loguearse'
                     });
                 }
             })
