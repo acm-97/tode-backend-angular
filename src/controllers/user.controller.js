@@ -1,7 +1,6 @@
 const User = require('../models/user.model');
 const Permision = require('../models/permision.model')
 const Oauth2User = require("../models/oauth2User.model");
-const _ = require('../../../tode-frontend/node_modules/lodash')
 
 const userController = {};
 
@@ -35,25 +34,17 @@ userController.getUsersToPermission = async (req, res, next) => {
     await Oauth2User.find({
         name: {$regex: regex, $options: 'i'}
     }).then( users => {  
-        let names = new Array
-        users.forEach( (user, index) => {
-            if (req.user && user._id.toString() != req.user._id.toString()) {  
-                //names[index] = user.name              
-                names.push(user.name)
-            }
-        })     
-        /* Permision.find({
-                document: query.document
-            }).then(function (permision) {
-                let users = permision.map( perm => {
-                    return user.filter(val => val._id !== perm.withPermisions)
-                })   */
-                  
-                    res.status(200).json(names)
-                })
-            .catch(err => res.status(400).json(err))
-
-   /*  }) */
+        permisions.forEach( perm => {
+            users.forEach( user => {
+                if (perm && user._id.toString() != perm.withPermisions.toString()) {  
+                    //names[index] = user.name              
+                    names.push(user.name)
+                }
+            })     
+        }) 
+        res.status(200).json(names)
+     })
+    .catch(err => res.status(400).json(err))
 };
 
 userController.updateUser = async (req, res, next) =>{

@@ -1,12 +1,25 @@
-const { Router } = require('express');
-const router = Router();
-const { get_message, post_message } = require('../controllers/message.controller')
+var express = require('express');
+var router = express.Router();
+var Chat = require('../models/message.model');
 
-router.route('/api/message/:id').get(get_message);
+/* GET ALL CHATS */
+router.get('/api/message/:room', function(req, res, next) {  
+  console.log("heyyy",req.params.room);
+  
+  Chat.find({ room: req.params.room }, function (err, chats) {
+    if (err) return next(err);
+    res.json(chats);
+  });
+});
 
-router.route('/api/message').post(post_message);
-
-
-
+/* SAVE CHAT */
+router.post('/api/message', function(req, res, next) {
+  console.log(req.body);
+  
+  Chat.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
 module.exports = router;

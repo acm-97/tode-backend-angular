@@ -38,7 +38,7 @@ passport.use(new OAuth2Strategy({
     const str = profile.user.email;
     const name = str.split('@');
 
-    if (!currentUser && currentUser.name != name[0]) {
+    if (!currentUser) {
       await new Oauth2User({
         access_token: profile.access_token,
         expires_in: expires,

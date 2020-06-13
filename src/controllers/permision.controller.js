@@ -44,7 +44,7 @@ permisionController.post_permision = async (req, res, next) => {
                             withPermisions: newPpermision.withPermisions
                         }).populate('document').then(perm => {
                             notification_body = {
-                                notification: `Un usuaio desea compartirte`,
+                                notification: `Un usuario desea compartirte`,
                                 forPermisions: newPpermision.withPermisions,
                                 document: newPpermision.document
                             };

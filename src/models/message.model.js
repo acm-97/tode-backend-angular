@@ -1,26 +1,10 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
-// Blueprint of what a message would look like in our DB.
-const MessageSchema = new Schema({
-    sender: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String
-    },
-    document: {
-        type: Schema.ObjectId, ref:'document'
-    },
-    timestamp: {
-        type: Date,
-        default: Date.now
-    }
+var ChatSchema = new mongoose.Schema({
+  room: String,
+  nickname: String,
+  message: String,
+  updated_at: { type: Date, default: Date.now },
 });
 
-// Makes a model of the above schema.
-const Message = mongoose.model("Message", MessageSchema);
-
-// Exporting the model so that it can be used in server.js and/or other files.
-module.exports = Message;
+module.exports = mongoose.model('Chat', ChatSchema);

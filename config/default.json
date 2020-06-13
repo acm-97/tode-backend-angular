@@ -1,5 +1,5 @@
 {
-    "MONGODB_URI": "mongodb://localhost/tode",
+    "MONGODB_URI": "mongodb://localhost/tode-angular",
     "jwtSecret": "Secrete_User_Password",
     "port": 4000,
     "data_dir": "/media/alejandro/6EBCB2ECBCB2AE49/Tocororo/Proyectos/tode-Angular/data",
@@ -8,8 +8,8 @@
     "behind-proxy": false,
     "authorizationURL":" https://sceiba-lab.upr.edu.cu/oauth/authorize",
     "tokenURL": "https://sceiba-lab.upr.edu.cu/oauth/token",
-    "clientID": "wD07vfK94DxbBSRPWApbX563k2UuBFRv4ZTFmDQ7",
-    "clientSecret": "i6fjtuFMy6TZsTGorqPCg5GlGivTof5iJ1Exzo9d8Ei2wq5PAFG9dl7fXlnl",
+    "clientID": "aZV8oY8CiBS1u21zRAysXlwy08PqAHf1m4VQNc0I",
+    "clientSecret": "MhAM28QzVE80ggsJKRPubCAptPaoyuBnEqpv1cOhyFRJPNMQrV8RHJY8OXAS",
     "callbackURL": "/api/oauth2",
     "CLIENT_HOME_PAGE_URL": "https://localhost:4200"
     

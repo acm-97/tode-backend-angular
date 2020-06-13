@@ -29,8 +29,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(options, app);
-var socketIO = require('socket.io')
-var io = socketIO(server);
+var io = require('socket.io')(server);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -83,14 +82,14 @@ function onListening() {
 }
 
 // Starting a socket on the specified server
-io.on("connection", function(socket) {
-  console.log("Connection established!");
-
-  socket.on("newChatMessage", data => {
-    io.emit("newChatMessage", data);
+// socket io
+io.on('connection', function (socket) {
+  console.log('User connected');
+  socket.on('disconnect', function() {
+    console.log('User disconnected');
   });
-
-  socket.on("disconnect", function() {
-    console.log("Disconnected!");
+  socket.on('save-message', function (data) {
+    console.log(data);
+    io.emit('new-message', { message: data });
   });
 });
