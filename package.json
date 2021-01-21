@@ -33,7 +33,7 @@
     "parse-formdata": "^1.0.2",
     "passport": "^0.4.1",
     "passport-oauth2": "^1.5.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "uuid": "^3.4.0",
     "validator": "^12.2.0",
     "yargs": "^11.0.0"
